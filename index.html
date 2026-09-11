@@ -91,6 +91,11 @@
             color: #d65a73;
         }
 
+        #mensaje1 {
+            margin-top: 15px;
+            min-height: 20px;
+        }
+
         .hidden {
             display: none;
         }
@@ -202,8 +207,8 @@
     =========================================
     */
 
-    // CAMBIA ESTA CONTRASEÑA
-    const CONTRASENA = "CAMBIAME";
+    // CONTRASEÑA DE ACCESO
+    const CONTRASENA = "ME ENCANTAS";
 
 
     /*
@@ -215,7 +220,9 @@
     function entrar() {
 
         const password =
-            document.getElementById("password").value;
+            document.getElementById("password").value
+            .trim()
+            .toUpperCase();
 
         const mensaje =
             document.getElementById("mensaje");
@@ -266,17 +273,14 @@
             document.getElementById("respuesta1")
             .value
             .trim()
-            .toLowerCase();
+            .toLowerCase()
+            .replace(/\s+/g, " ");
 
         const mensaje =
             document.getElementById("mensaje1");
 
-        /*
-        AQUÍ DESPUÉS PONDREMOS
-        LA PALABRA CORRECTA.
-        */
-
-        const respuestaCorrecta = "PENDIENTE";
+        // RESPUESTA CORRECTA
+        const respuestaCorrecta = "ozii ozii";
 
         if (respuesta === respuestaCorrecta) {
 
