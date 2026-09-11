@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -44,10 +43,6 @@
             font-size: 28px;
             letter-spacing: 4px;
             margin-bottom: 15px;
-        }
-
-        h2 {
-            margin-bottom: 20px;
         }
 
         .subtitle {
@@ -101,8 +96,14 @@
             display: none;
         }
 
-        .success {
-            animation: aparecer 1s ease;
+        .foto-acertijo {
+            width: 100%;
+            max-height: 350px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+            box-shadow: 0 0 25px rgba(150, 0, 30, 0.25);
         }
 
         @keyframes aparecer {
@@ -177,7 +178,7 @@
 
         <h1>🧩</h1>
 
-        <h2>
+        <h2 style="margin-bottom:20px;">
             Una pregunta sobre ti...
         </h2>
 
@@ -209,7 +210,7 @@
 
         <h1>❤️</h1>
 
-        <h2>
+        <h2 style="margin-bottom:20px;">
             Una pregunta sobre nosotros...
         </h2>
 
@@ -217,15 +218,98 @@
             ¿Cuál es nuestra foto favorita? ❤️
         </p>
 
-        <p style="color:#777; margin-bottom:20px;">
-            Este acertijo todavía está en construcción...
-        </p>
+        <img
+            src="foto-favorita.jpg"
+            alt="Foto favorita"
+            class="foto-acertijo"
+        >
 
-        <button onclick="continuar2()">
-            CONTINUAR
+        <button onclick="resolver2()">
+            ❤️ ES ESTA
         </button>
 
         <p id="mensaje2"></p>
+
+    </div>
+
+
+    <!-- ACERTIJO 3 -->
+    <div class="container hidden" id="acertijo3">
+
+        <p style="color:#888; margin-bottom:15px;">
+            ACERTIJO 03 / 04
+        </p>
+
+        <h1>🔢</h1>
+
+        <h2 style="margin-bottom:20px;">
+            Una pequeña operación...
+        </h2>
+
+        <p class="subtitle">
+            El siguiente secreto se encuentra
+            escondido en unos números.
+            <br><br>
+            ¿Estás lista para descubrirlo? 👀
+        </p>
+
+        <button onclick="resolver3()">
+            CONTINUAR
+        </button>
+
+    </div>
+
+
+    <!-- ACERTIJO 4 -->
+    <div class="container hidden" id="acertijo4">
+
+        <p style="color:#888; margin-bottom:15px;">
+            ACERTIJO 04 / 04
+        </p>
+
+        <h1>🔐</h1>
+
+        <h2>
+            El último acertijo...
+        </h2>
+
+        <p class="subtitle">
+            Has llegado hasta aquí.
+            <br><br>
+            Pero todavía falta descubrir algo.
+        </p>
+
+        <button onclick="resolver4()">
+            DESCUBRIR
+        </button>
+
+    </div>
+
+
+    <!-- REVELACIÓN FINAL -->
+    <div class="container hidden" id="final">
+
+        <div class="lock">❤️</div>
+
+        <h1>
+            TODAS LAS PRUEBAS COMPLETADAS
+        </h1>
+
+        <p class="subtitle">
+            Has descubierto la fecha...
+        </p>
+
+        <h2 style="font-size:32px; color:#d65a73; margin:25px 0;">
+            21 DE SEPTIEMBRE DE 2026
+        </h2>
+
+        <p class="subtitle">
+            Pero esto no termina aquí...
+        </p>
+
+        <button onclick="abrirMensaje()">
+            ▶️ ABRIR MI ÚLTIMO MENSAJE
+        </button>
 
     </div>
 
@@ -341,18 +425,79 @@
 
     /*
     =========================================
-    ACERTIJO 2 — TEMPORAL
+    ACERTIJO 2
     =========================================
     */
 
-    function continuar2() {
+    function resolver2() {
 
-        document.getElementById("acertijo2")
+        const mensaje =
+            document.getElementById("mensaje2");
+
+        mensaje.style.color = "#65d68a";
+
+        mensaje.textContent =
+            "✓ Correcto. Este recuerdo también guarda una pista.";
+
+        setTimeout(() => {
+
+            document.getElementById("acertijo2")
+                .classList.add("hidden");
+
+            document.getElementById("acertijo3")
+                .classList.remove("hidden");
+
+        }, 1200);
+
+    }
+
+
+    /*
+    =========================================
+    ACERTIJO 3
+    =========================================
+    */
+
+    function resolver3() {
+
+        document.getElementById("acertijo3")
             .classList.add("hidden");
 
-        // Aquí después conectaremos el ACERTIJO 3.
+        document.getElementById("acertijo4")
+            .classList.remove("hidden");
 
-        alert("Acertijo 3 próximamente 👀");
+    }
+
+
+    /*
+    =========================================
+    ACERTIJO 4
+    =========================================
+    */
+
+    function resolver4() {
+
+        document.getElementById("acertijo4")
+            .classList.add("hidden");
+
+        document.getElementById("final")
+            .classList.remove("hidden");
+
+    }
+
+
+    /*
+    =========================================
+    ÚLTIMO MENSAJE
+    =========================================
+    */
+
+    function abrirMensaje() {
+
+        window.open(
+            "https://www.youtube.com/watch?v=pCPYb7KPoUc",
+            "_blank"
+        );
 
     }
 
@@ -360,4 +505,3 @@
 
 </body>
 </html>
-```
