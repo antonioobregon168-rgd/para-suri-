@@ -32,6 +32,7 @@
             border-radius: 20px;
             background: rgba(15, 15, 15, 0.9);
             box-shadow: 0 0 40px rgba(150, 0, 30, 0.15);
+            animation: aparecer 0.5s ease;
         }
 
         .lock {
@@ -43,6 +44,10 @@
             font-size: 28px;
             letter-spacing: 4px;
             margin-bottom: 15px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
         }
 
         .subtitle {
@@ -68,6 +73,11 @@
             border-color: #8b1e35;
         }
 
+        input[type="file"] {
+            padding: 12px;
+            cursor: pointer;
+        }
+
         button {
             width: 100%;
             padding: 15px;
@@ -87,7 +97,9 @@
 
         #mensaje,
         #mensaje1,
-        #mensaje2 {
+        #mensaje2,
+        #mensaje3,
+        #mensaje4 {
             margin-top: 15px;
             min-height: 20px;
         }
@@ -96,20 +108,27 @@
             display: none;
         }
 
-        .foto-acertijo {
-            width: 100%;
-            max-height: 350px;
-            object-fit: cover;
-            border-radius: 15px;
-            margin-bottom: 20px;
+        .ecuacion {
+            background: #0b0b0b;
             border: 1px solid #333;
-            box-shadow: 0 0 25px rgba(150, 0, 30, 0.25);
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 20px;
+            font-size: 20px;
+            line-height: 1.8;
+        }
+
+        .fecha {
+            font-size: 32px;
+            color: #d65a73;
+            margin: 25px 0;
+            letter-spacing: 2px;
         }
 
         @keyframes aparecer {
             from {
                 opacity: 0;
-                transform: scale(0.9);
+                transform: scale(0.95);
             }
 
             to {
@@ -122,7 +141,11 @@
 
 <body>
 
-    <!-- PANTALLA DE CONTRASEÑA -->
+
+    <!-- =========================================
+         PANTALLA DE CONTRASEÑA
+         ========================================= -->
+
     <div class="container" id="login">
 
         <div class="lock">🔐</div>
@@ -149,7 +172,10 @@
     </div>
 
 
-    <!-- PANTALLA DESPUÉS DE LA CONTRASEÑA -->
+    <!-- =========================================
+         BIENVENIDA
+         ========================================= -->
+
     <div class="container hidden" id="bienvenida">
 
         <div class="lock">✓</div>
@@ -169,7 +195,10 @@
     </div>
 
 
-    <!-- ACERTIJO 1 -->
+    <!-- =========================================
+         ACERTIJO 1
+         ========================================= -->
+
     <div class="container hidden" id="acertijo1">
 
         <p style="color:#888; margin-bottom:15px;">
@@ -178,7 +207,7 @@
 
         <h1>🧩</h1>
 
-        <h2 style="margin-bottom:20px;">
+        <h2>
             Una pregunta sobre ti...
         </h2>
 
@@ -201,7 +230,10 @@
     </div>
 
 
-    <!-- ACERTIJO 2 -->
+    <!-- =========================================
+         ACERTIJO 2
+         ========================================= -->
+
     <div class="container hidden" id="acertijo2">
 
         <p style="color:#888; margin-bottom:15px;">
@@ -210,22 +242,24 @@
 
         <h1>❤️</h1>
 
-        <h2 style="margin-bottom:20px;">
+        <h2>
             Una pregunta sobre nosotros...
         </h2>
 
         <p class="subtitle">
-            ¿Cuál es nuestra foto favorita? ❤️
+            Hay una foto que guarda un recuerdo especial.
+            <br><br>
+            ¿Cuál es?
         </p>
 
-        <img
-            src="foto-favorita.jpg"
-            alt="Foto favorita"
-            class="foto-acertijo"
+        <input
+            type="file"
+            id="fotoInput"
+            accept="image/*"
         >
 
         <button onclick="resolver2()">
-            ❤️ ES ESTA
+            🔍 COMPROBAR FOTO
         </button>
 
         <p id="mensaje2"></p>
@@ -233,7 +267,10 @@
     </div>
 
 
-    <!-- ACERTIJO 3 -->
+    <!-- =========================================
+         ACERTIJO 3
+         ========================================= -->
+
     <div class="container hidden" id="acertijo3">
 
         <p style="color:#888; margin-bottom:15px;">
@@ -242,25 +279,45 @@
 
         <h1>🔢</h1>
 
-        <h2 style="margin-bottom:20px;">
-            Una pequeña operación...
+        <h2>
+            Los números también guardan recuerdos...
         </h2>
 
         <p class="subtitle">
-            El siguiente secreto se encuentra
-            escondido en unos números.
-            <br><br>
-            ¿Estás lista para descubrirlo? 👀
+            Toma estos tres números:
         </p>
 
+        <div class="ecuacion">
+            17 + 18 + 6 = ?
+        </div>
+
+        <p class="subtitle">
+            17 por una parte.<br>
+            18 por otra.<br>
+            Y 6 años de conocernos.
+            <br><br>
+            ¿Cuál es el resultado?
+        </p>
+
+        <input
+            type="number"
+            id="respuesta3"
+            placeholder="Escribe el resultado"
+        >
+
         <button onclick="resolver3()">
-            CONTINUAR
+            COMPROBAR
         </button>
+
+        <p id="mensaje3"></p>
 
     </div>
 
 
-    <!-- ACERTIJO 4 -->
+    <!-- =========================================
+         ACERTIJO 4
+         ========================================= -->
+
     <div class="container hidden" id="acertijo4">
 
         <p style="color:#888; margin-bottom:15px;">
@@ -270,23 +327,46 @@
         <h1>🔐</h1>
 
         <h2>
-            El último acertijo...
+            El último secreto...
         </h2>
 
         <p class="subtitle">
-            Has llegado hasta aquí.
+            Has encontrado el número anterior.
             <br><br>
-            Pero todavía falta descubrir algo.
+            Ahora junta las últimas pistas.
         </p>
 
+        <div class="ecuacion">
+            17 + 18 - 14 = 21
+            <br>
+            6 + 3 = 9
+            <br>
+            2009 + 17 = 2026
+        </div>
+
+        <p class="subtitle">
+            Escribe la fecha que acabas de descubrir.
+        </p>
+
+        <input
+            type="text"
+            id="respuesta4"
+            placeholder="DD/MM/AAAA"
+        >
+
         <button onclick="resolver4()">
-            DESCUBRIR
+            🔓 DESBLOQUEAR
         </button>
+
+        <p id="mensaje4"></p>
 
     </div>
 
 
-    <!-- REVELACIÓN FINAL -->
+    <!-- =========================================
+         FINAL
+         ========================================= -->
+
     <div class="container hidden" id="final">
 
         <div class="lock">❤️</div>
@@ -299,9 +379,10 @@
             Has descubierto la fecha...
         </p>
 
-        <h2 style="font-size:32px; color:#d65a73; margin:25px 0;">
-            21 DE SEPTIEMBRE DE 2026
-        </h2>
+        <div class="fecha">
+            21 DE SEPTIEMBRE<br>
+            DE 2026
+        </div>
 
         <p class="subtitle">
             Pero esto no termina aquí...
@@ -316,6 +397,7 @@
 
 <script>
 
+
     /*
     =========================================
     CONFIGURACIÓN
@@ -323,6 +405,16 @@
     */
 
     const CONTRASENA = "ME ENCANTAS";
+
+
+    /*
+    =========================================
+    HUella DE LA FOTO CORRECTA
+    =========================================
+    */
+
+    const HASH_FOTO_CORRECTA =
+        "ffe577a0baddaf1f68caa3fc5cefb79bafbceb387dd45cc52dd0eca912dac8cc";
 
 
     /*
@@ -393,7 +485,8 @@
         const mensaje =
             document.getElementById("mensaje1");
 
-        const respuestaCorrecta = "ozii ozii";
+        const respuestaCorrecta =
+            "ozii ozii";
 
         if (respuesta === respuestaCorrecta) {
 
@@ -429,26 +522,72 @@
     =========================================
     */
 
-    function resolver2() {
+    async function resolver2() {
+
+        const input =
+            document.getElementById("fotoInput");
 
         const mensaje =
             document.getElementById("mensaje2");
 
-        mensaje.style.color = "#65d68a";
+        if (input.files.length === 0) {
 
-        mensaje.textContent =
-            "✓ Correcto. Este recuerdo también guarda una pista.";
+            mensaje.style.color = "#d65a73";
 
-        setTimeout(() => {
+            mensaje.textContent =
+                "Primero selecciona una foto. 👀";
 
-            document.getElementById("acertijo2")
-                .classList.add("hidden");
+            return;
+        }
 
-            document.getElementById("acertijo3")
-                .classList.remove("hidden");
+        const archivo = input.files[0];
 
-        }, 1200);
+        const buffer =
+            await archivo.arrayBuffer();
 
+        const hashBuffer =
+            await crypto.subtle.digest(
+                "SHA-256",
+                buffer
+            );
+
+        const hashArray =
+            Array.from(
+                new Uint8Array(hashBuffer)
+            );
+
+        const hash =
+            hashArray
+                .map(byte =>
+                    byte.toString(16).padStart(2, "0")
+                )
+                .join("");
+
+        if (hash === HASH_FOTO_CORRECTA) {
+
+            mensaje.style.color = "#65d68a";
+
+            mensaje.textContent =
+                "✓ Foto reconocida. Acertijo desbloqueado.";
+
+            setTimeout(() => {
+
+                document.getElementById("acertijo2")
+                    .classList.add("hidden");
+
+                document.getElementById("acertijo3")
+                    .classList.remove("hidden");
+
+            }, 1200);
+
+        } else {
+
+            mensaje.style.color = "#d65a73";
+
+            mensaje.textContent =
+                "✕ Esa no es la foto que estoy buscando... 👀";
+
+        }
     }
 
 
@@ -460,12 +599,39 @@
 
     function resolver3() {
 
-        document.getElementById("acertijo3")
-            .classList.add("hidden");
+        const respuesta =
+            document.getElementById("respuesta3")
+            .value
+            .trim();
 
-        document.getElementById("acertijo4")
-            .classList.remove("hidden");
+        const mensaje =
+            document.getElementById("mensaje3");
 
+        if (respuesta === "41") {
+
+            mensaje.style.color = "#65d68a";
+
+            mensaje.textContent =
+                "✓ Correcto. Los números empiezan a tener sentido...";
+
+            setTimeout(() => {
+
+                document.getElementById("acertijo3")
+                    .classList.add("hidden");
+
+                document.getElementById("acertijo4")
+                    .classList.remove("hidden");
+
+            }, 1200);
+
+        } else {
+
+            mensaje.style.color = "#d65a73";
+
+            mensaje.textContent =
+                "No exactamente... vuelve a calcularlo. 👀";
+
+        }
     }
 
 
@@ -477,12 +643,44 @@
 
     function resolver4() {
 
-        document.getElementById("acertijo4")
-            .classList.add("hidden");
+        const respuesta =
+            document.getElementById("respuesta4")
+            .value
+            .trim()
+            .replace(/\s/g, "")
+            .replace(/-/g, "/");
 
-        document.getElementById("final")
-            .classList.remove("hidden");
+        const mensaje =
+            document.getElementById("mensaje4");
 
+        if (
+            respuesta === "21/09/2026" ||
+            respuesta === "21/9/2026"
+        ) {
+
+            mensaje.style.color = "#65d68a";
+
+            mensaje.textContent =
+                "✓ Código final desbloqueado.";
+
+            setTimeout(() => {
+
+                document.getElementById("acertijo4")
+                    .classList.add("hidden");
+
+                document.getElementById("final")
+                    .classList.remove("hidden");
+
+            }, 1200);
+
+        } else {
+
+            mensaje.style.color = "#d65a73";
+
+            mensaje.textContent =
+                "La fecha no es correcta... revisa las operaciones. 👀";
+
+        }
     }
 
 
