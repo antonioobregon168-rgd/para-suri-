@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -45,6 +46,10 @@
             margin-bottom: 15px;
         }
 
+        h2 {
+            margin-bottom: 20px;
+        }
+
         .subtitle {
             color: #999;
             margin-bottom: 30px;
@@ -85,13 +90,9 @@
             transform: translateY(-2px);
         }
 
-        #mensaje {
-            margin-top: 15px;
-            min-height: 20px;
-            color: #d65a73;
-        }
-
-        #mensaje1 {
+        #mensaje,
+        #mensaje1,
+        #mensaje2 {
             margin-top: 15px;
             min-height: 20px;
         }
@@ -167,7 +168,7 @@
     </div>
 
 
-    <!-- PRIMER ACERTIJO -->
+    <!-- ACERTIJO 1 -->
     <div class="container hidden" id="acertijo1">
 
         <p style="color:#888; margin-bottom:15px;">
@@ -176,7 +177,7 @@
 
         <h1>🧩</h1>
 
-        <h2 style="margin-bottom:20px;">
+        <h2>
             Una pregunta sobre ti...
         </h2>
 
@@ -199,6 +200,36 @@
     </div>
 
 
+    <!-- ACERTIJO 2 -->
+    <div class="container hidden" id="acertijo2">
+
+        <p style="color:#888; margin-bottom:15px;">
+            ACERTIJO 02 / 04
+        </p>
+
+        <h1>❤️</h1>
+
+        <h2>
+            Una pregunta sobre nosotros...
+        </h2>
+
+        <p class="subtitle">
+            ¿Cuál es nuestra foto favorita? ❤️
+        </p>
+
+        <p style="color:#777; margin-bottom:20px;">
+            Este acertijo todavía está en construcción...
+        </p>
+
+        <button onclick="continuar2()">
+            CONTINUAR
+        </button>
+
+        <p id="mensaje2"></p>
+
+    </div>
+
+
 <script>
 
     /*
@@ -207,7 +238,6 @@
     =========================================
     */
 
-    // CONTRASEÑA DE ACCESO
     const CONTRASENA = "ME ENCANTAS";
 
 
@@ -279,7 +309,6 @@
         const mensaje =
             document.getElementById("mensaje1");
 
-        // RESPUESTA CORRECTA
         const respuestaCorrecta = "ozii ozii";
 
         if (respuesta === respuestaCorrecta) {
@@ -288,6 +317,16 @@
 
             mensaje.textContent =
                 "✓ Correcto. Acertijo desbloqueado.";
+
+            setTimeout(() => {
+
+                document.getElementById("acertijo1")
+                    .classList.add("hidden");
+
+                document.getElementById("acertijo2")
+                    .classList.remove("hidden");
+
+            }, 800);
 
         } else {
 
@@ -299,7 +338,26 @@
         }
     }
 
+
+    /*
+    =========================================
+    ACERTIJO 2 — TEMPORAL
+    =========================================
+    */
+
+    function continuar2() {
+
+        document.getElementById("acertijo2")
+            .classList.add("hidden");
+
+        // Aquí después conectaremos el ACERTIJO 3.
+
+        alert("Acertijo 3 próximamente 👀");
+
+    }
+
 </script>
 
 </body>
 </html>
+```
