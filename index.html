@@ -1,1567 +1,1376 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Archivo 21</title>
+<title>Un pequeño misterio 💜</title>
 
-    <style>
+<style>
 
-        /* =========================================
-           CONFIGURACIÓN GENERAL
-           ========================================= */
+* {
+    box-sizing: border-box;
+}
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+html {
+    scroll-behavior: smooth;
+}
 
-        body {
-            min-height: 100vh;
-            background:
-                radial-gradient(circle at 20% 20%, #32145c 0%, transparent 30%),
-                radial-gradient(circle at 80% 80%, #47146b 0%, transparent 30%),
-                #07030d;
+body {
+    margin: 0;
+    min-height: 100vh;
+    min-height: 100dvh;
 
-            color: white;
+    font-family: Arial, Helvetica, sans-serif;
 
-            font-family: Arial, sans-serif;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(155, 70, 255, 0.35), transparent 30%),
+        radial-gradient(circle at 80% 80%, rgba(90, 30, 180, 0.35), transparent 30%),
+        linear-gradient(135deg, #080014, #17002c, #050008);
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
+    color: white;
 
-            overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-            position: relative;
-        }
+    overflow-x: hidden;
+    overflow-y: auto;
 
+    padding: 20px 0;
+}
 
-        /* =========================================
-           FONDO ANIMADO
-           ========================================= */
+/* =========================
+   FONDO ANIMADO
+========================= */
 
-        body::before {
-            content: "";
-            position: fixed;
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    width: 300px;
+    height: 300px;
 
-            width: 450px;
-            height: 450px;
+    border-radius: 50%;
 
-            background: #8b3dff;
+    filter: blur(100px);
 
-            filter: blur(150px);
+    opacity: 0.35;
 
-            opacity: 0.16;
+    z-index: -2;
 
-            border-radius: 50%;
+    animation: moverLuz 8s infinite alternate ease-in-out;
+}
 
-            top: -150px;
-            left: -100px;
+body::before {
+    background: #9b4dff;
+    top: -100px;
+    left: -100px;
+}
 
-            animation: moverLuz 8s infinite alternate ease-in-out;
-        }
+body::after {
+    background: #5c1cff;
+    bottom: -100px;
+    right: -100px;
 
+    animation-delay: 2s;
+}
 
-        body::after {
-            content: "";
-            position: fixed;
+@keyframes moverLuz {
 
-            width: 400px;
-            height: 400px;
+    from {
+        transform: translate(0, 0) scale(1);
+    }
 
-            background: #c84dff;
+    to {
+        transform: translate(100px, 60px) scale(1.3);
+    }
+}
 
-            filter: blur(150px);
+/* ESTRELLAS */
 
-            opacity: 0.12;
+.estrellas {
+    position: fixed;
+    inset: 0;
 
-            border-radius: 50%;
+    pointer-events: none;
 
-            bottom: -150px;
-            right: -100px;
+    z-index: -1;
 
-            animation: moverLuz2 10s infinite alternate ease-in-out;
-        }
+    background-image:
+        radial-gradient(circle, white 1px, transparent 1px),
+        radial-gradient(circle, #c58cff 1px, transparent 1px);
 
+    background-size: 80px 80px, 120px 120px;
 
-        @keyframes moverLuz {
+    background-position: 0 0, 40px 50px;
 
-            from {
-                transform: translate(0, 0);
-            }
+    opacity: 0.25;
 
-            to {
-                transform: translate(150px, 100px);
-            }
+    animation: estrellas 15s linear infinite;
+}
 
-        }
+@keyframes estrellas {
 
+    from {
+        transform: translateY(0);
+    }
 
-        @keyframes moverLuz2 {
+    to {
+        transform: translateY(-80px);
+    }
+}
 
-            from {
-                transform: translate(0, 0);
-            }
+/* =========================
+   CONTENEDOR
+========================= */
 
-            to {
-                transform: translate(-120px, -80px);
-            }
+.container {
 
-        }
+    width: min(92%, 650px);
 
+    margin: auto;
 
-        /* =========================================
-           ESTRELLAS
-           ========================================= */
+    padding: 38px 30px;
 
-        .estrellas {
-            position: fixed;
+    border-radius: 25px;
 
-            inset: 0;
+    background: rgba(20, 5, 35, 0.75);
 
-            pointer-events: none;
+    border: 1px solid rgba(190, 120, 255, 0.4);
 
-            background-image:
-                radial-gradient(circle, rgba(255,255,255,.7) 1px, transparent 1px),
-                radial-gradient(circle, rgba(190,120,255,.5) 1px, transparent 1px);
+    box-shadow:
+        0 0 40px rgba(150, 70, 255, 0.25),
+        inset 0 0 30px rgba(140, 50, 255, 0.05);
 
-            background-size:
-                90px 90px,
-                140px 140px;
+    backdrop-filter: blur(18px);
 
-            animation: estrellasMover 18s linear infinite;
+    text-align: center;
 
-            opacity: 0.25;
-        }
+    animation: aparecer 0.8s ease;
 
+    max-height: none;
+    overflow: visible;
+}
 
-        @keyframes estrellasMover {
+@keyframes aparecer {
 
-            from {
-                transform: translateY(0);
-            }
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(0.97);
+    }
 
-            to {
-                transform: translateY(-90px);
-            }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
 
-        }
+/* =========================
+   TITULOS
+========================= */
 
+h1 {
 
-        /* =========================================
-           TARJETAS
-           ========================================= */
+    font-size: clamp(28px, 7vw, 46px);
 
-        .container {
+    margin-bottom: 10px;
 
-            position: relative;
-            z-index: 2;
+    background: linear-gradient(
+        90deg,
+        #ffffff,
+        #d9a7ff,
+        #ffffff
+    );
 
-            width: 90%;
-            max-width: 540px;
+    background-size: 200% auto;
 
-            max-height: 90vh;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 
-            overflow-y: auto;
+    animation: brillo 4s linear infinite;
+}
 
-            text-align: center;
+@keyframes brillo {
 
-            padding: 40px;
+    to {
+        background-position: 200% center;
+    }
+}
 
-            border-radius: 28px;
+h2 {
 
-            border: 1px solid rgba(190, 120, 255, 0.25);
+    font-size: clamp(21px, 5vw, 30px);
 
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(35, 15, 55, 0.88),
-                    rgba(10, 5, 20, 0.94)
-                );
+    margin-bottom: 20px;
+}
 
-            backdrop-filter: blur(18px);
+p {
 
-            box-shadow:
-                0 0 30px rgba(145, 60, 255, 0.18),
-                inset 0 0 30px rgba(160, 80, 255, 0.03);
+    color: #d8c9e8;
 
-            animation: aparecer 0.7s ease;
+    line-height: 1.6;
 
-        }
+    font-size: 16px;
+}
 
+/* =========================
+   INPUTS
+========================= */
 
-        /* =========================================
-           ANIMACIÓN DE ENTRADA
-           ========================================= */
+input {
 
-        @keyframes aparecer {
+    width: 100%;
 
-            from {
-                opacity: 0;
-                transform: translateY(25px) scale(0.96);
-            }
+    min-height: 52px;
 
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+    padding: 14px 16px;
 
-        }
+    margin: 12px 0;
 
+    border-radius: 14px;
 
-        /* =========================================
-           ICONOS
-           ========================================= */
+    border: 1px solid rgba(190, 120, 255, 0.5);
 
-        .lock {
+    background: rgba(255, 255, 255, 0.08);
 
-            font-size: 60px;
+    color: white;
 
-            margin-bottom: 20px;
+    font-size: 16px;
 
-            filter:
-                drop-shadow(0 0 10px #9d4edd)
-                drop-shadow(0 0 25px rgba(157,78,221,.6));
+    outline: none;
 
-            animation: flotar 3s ease-in-out infinite;
+    caret-color: #d99cff;
 
-        }
+    -webkit-appearance: none;
 
+    appearance: none;
 
-        @keyframes flotar {
+    transition: 0.25s;
+}
 
-            0%, 100% {
-                transform: translateY(0);
-            }
+input::placeholder {
+    color: #b8a5c9;
+}
 
-            50% {
-                transform: translateY(-8px);
-            }
+input:focus {
 
-        }
+    border-color: #c875ff;
 
+    box-shadow:
+        0 0 15px rgba(190, 80, 255, 0.35);
 
-        /* =========================================
-           TÍTULOS
-           ========================================= */
+    background: rgba(255,255,255,0.12);
+}
 
-        h1 {
+/* =========================
+   BOTONES
+========================= */
 
-            font-size: 27px;
+button {
 
-            letter-spacing: 4px;
+    width: 100%;
 
-            margin-bottom: 18px;
+    min-height: 52px;
 
-            background:
-                linear-gradient(
-                    90deg,
-                    #ffffff,
-                    #d9a7ff,
-                    #ffffff
-                );
+    margin-top: 12px;
 
-            background-size: 200%;
+    padding: 14px 20px;
 
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+    border: none;
 
-            animation: brilloTexto 4s linear infinite;
+    border-radius: 14px;
 
-        }
+    color: white;
 
+    font-size: 16px;
 
-        @keyframes brilloTexto {
+    font-weight: bold;
 
-            from {
-                background-position: 0%;
-            }
+    cursor: pointer;
 
-            to {
-                background-position: 200%;
-            }
+    background:
+        linear-gradient(
+            135deg,
+            #7d2cff,
+            #b34cff
+        );
 
-        }
+    box-shadow:
+        0 0 20px rgba(150, 60, 255, 0.35);
 
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+}
 
-        h2 {
+button:hover {
 
-            margin-bottom: 20px;
+    transform: translateY(-3px);
 
-            color: #eee;
+    box-shadow:
+        0 0 30px rgba(180, 80, 255, 0.65);
+}
 
-        }
+button:active {
 
+    transform: scale(0.97);
+}
 
-        .subtitle {
+/* =========================
+   ACERTIJOS
+========================= */
 
-            color: #b8a9c9;
+.acertijo {
 
-            margin-bottom: 30px;
+    display: none;
 
-            line-height: 1.7;
+    animation: aparecer 0.6s ease;
+}
 
-        }
+.acertijo.activo {
 
+    display: block;
+}
 
-        /* =========================================
-           INDICADOR DE PROGRESO
-           ========================================= */
+.numero {
 
-        .progreso {
+    display: inline-block;
 
-            font-size: 13px;
+    padding: 7px 13px;
 
-            letter-spacing: 3px;
+    border-radius: 30px;
 
-            color: #a875d8;
+    background: rgba(170, 80, 255, 0.15);
 
-            margin-bottom: 20px;
+    border: 1px solid rgba(190, 120, 255, 0.35);
 
-        }
+    color: #dba8ff;
 
+    font-size: 13px;
 
-        /* =========================================
-           INPUTS
-           ========================================= */
+    letter-spacing: 2px;
 
-        input {
+    margin-bottom: 15px;
+}
 
-            width: 100%;
+/* =========================
+   MENSAJES
+========================= */
 
-            padding: 16px;
+.mensaje {
 
-            background:
-                rgba(8, 4, 15, 0.8);
+    min-height: 25px;
 
-            border:
+    margin-top: 15px;
 
-                1px solid
-                rgba(180, 100, 255, 0.25);
+    font-weight: bold;
 
-            border-radius: 14px;
+    color: #ff9eea;
+}
 
-            color: white;
+/* =========================
+   FOTO
+========================= */
 
-            text-align: center;
+#preview {
 
-            font-size: 16px;
+    display: none;
 
-            outline: none;
+    width: 100%;
 
-            margin-bottom: 16px;
+    max-height: 300px;
 
-            transition: 0.3s;
+    object-fit: contain;
 
-        }
+    margin: 15px auto;
 
+    border-radius: 18px;
 
-        input:focus {
+    border: 1px solid rgba(190, 120, 255, 0.4);
 
-            border-color: #a855f7;
+    box-shadow:
+        0 0 25px rgba(150, 60, 255, 0.3);
 
-            box-shadow:
-                0 0 15px rgba(168,85,247,.25);
+    animation: aparecerFoto 0.5s ease;
+}
 
-        }
+@keyframes aparecerFoto {
 
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
 
-        input[type="file"] {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
 
-            cursor: pointer;
+/* =========================
+   PISTAS
+========================= */
 
-            padding: 13px;
+.pista {
 
-        }
+    margin: 12px 0;
 
+    padding: 14px;
 
-        /* =========================================
-           BOTONES
-           ========================================= */
+    border-radius: 13px;
 
-        button {
+    background: rgba(130, 50, 200, 0.09);
 
-            width: 100%;
+    border-left: 3px solid #a95cff;
 
-            padding: 16px;
+    color: #d8c9e8;
 
-            border: none;
+    text-align: left;
+}
 
-            border-radius: 14px;
+/* =========================
+   FECHA FINAL
+========================= */
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #7028d9,
-                    #9b3dff
-                );
+.fecha {
 
-            color: white;
+    margin: 30px 0;
 
-            font-size: 16px;
+    padding: 25px 15px;
 
-            font-weight: bold;
+    border-radius: 20px;
 
-            cursor: pointer;
+    background: rgba(140, 40, 255, 0.12);
 
-            transition: 0.3s;
+    border: 1px solid rgba(200, 130, 255, 0.5);
 
-            box-shadow:
-                0 0 15px rgba(145,60,255,.25);
+    box-shadow:
+        0 0 35px rgba(160, 60, 255, 0.4);
 
-            position: relative;
+    animation: pulsar 2.5s infinite ease-in-out;
+}
 
-            overflow: hidden;
+.fecha-grande {
 
-        }
+    font-size: clamp(30px, 8vw, 50px);
 
+    font-weight: bold;
 
-        button::before {
+    color: #e4b4ff;
 
-            content: "";
+    text-shadow:
+        0 0 15px #9c42ff,
+        0 0 35px #7b20ff;
+}
 
-            position: absolute;
+@keyframes pulsar {
 
-            top: 0;
-            left: -100%;
+    0%,100% {
+        transform: scale(1);
+    }
 
-            width: 100%;
-            height: 100%;
+    50% {
+        transform: scale(1.025);
+    }
+}
 
-            background:
-                linear-gradient(
-                    90deg,
-                    transparent,
-                    rgba(255,255,255,.25),
-                    transparent
-                );
+/* =========================
+   CORAZON
+========================= */
 
-            transition: 0.5s;
+.corazon {
 
-        }
+    font-size: 45px;
 
+    animation:
+        latido 1.5s infinite;
+}
 
-        button:hover::before {
+@keyframes latido {
 
-            left: 100%;
+    0%,100% {
+        transform: scale(1);
+    }
 
-        }
+    50% {
+        transform: scale(1.2);
+    }
+}
 
+/* =========================
+   CELULAR
+========================= */
 
-        button:hover {
+@media (max-width: 600px) {
 
-            transform: translateY(-3px);
+    body {
 
-            box-shadow:
-                0 0 25px rgba(168,85,247,.55);
+        align-items: flex-start;
 
-        }
+        padding-top: 25px;
+        padding-bottom: 30px;
 
+        overflow-y: auto;
+    }
 
-        button:active {
+    .container {
 
-            transform: scale(0.97);
+        width: 94%;
 
-        }
+        margin: 0 auto;
 
+        padding: 28px 20px;
+    }
 
-        /* =========================================
-           MENSAJES
-           ========================================= */
+    input {
 
-        #mensaje,
-        #mensaje1,
-        #mensaje2,
-        #mensaje3,
-        #mensaje4 {
+        font-size: 16px;
 
-            margin-top: 15px;
+        min-height: 52px;
+    }
 
-            min-height: 20px;
+    button {
 
-        }
+        min-height: 52px;
+    }
 
+    p {
 
-        /* =========================================
-           OCULTAR
-           ========================================= */
+        font-size: 15px;
+    }
 
-        .hidden {
+    .pista {
 
-            display: none;
+        font-size: 14px;
+    }
+}
 
-        }
-
-
-        /* =========================================
-           CAJAS DE PISTAS
-           ========================================= */
-
-        .ecuacion {
-
-            background:
-                rgba(8, 4, 15, 0.65);
-
-            border:
-                1px solid
-                rgba(168,85,247,.18);
-
-            border-radius: 18px;
-
-            padding: 20px;
-
-            margin-bottom: 20px;
-
-            line-height: 1.7;
-
-            box-shadow:
-                inset 0 0 20px
-                rgba(150,70,255,.03);
-
-        }
-
-
-        .pista {
-
-            padding: 16px;
-
-            margin: 12px 0;
-
-            border-left:
-                3px solid #9b5cff;
-
-            border-radius: 8px;
-
-            background:
-                rgba(120,50,180,.06);
-
-            text-align: left;
-
-            transition: 0.3s;
-
-        }
-
-
-        .pista:hover {
-
-            background:
-                rgba(150,70,220,.12);
-
-            transform: translateX(4px);
-
-        }
-
-
-        /* =========================================
-           FOTO
-           ========================================= */
-
-        .foto-preview {
-
-            width: 100%;
-
-            max-height: 300px;
-
-            object-fit: cover;
-
-            border-radius: 18px;
-
-            margin-top: 15px;
-
-            margin-bottom: 20px;
-
-            border:
-                1px solid
-                rgba(190,120,255,.3);
-
-            display: none;
-
-            box-shadow:
-                0 0 25px
-                rgba(150,70,255,.2);
-
-            animation: fotoEntrada .6s ease;
-
-        }
-
-
-        @keyframes fotoEntrada {
-
-            from {
-
-                opacity: 0;
-
-                transform: scale(.95);
-
-            }
-
-            to {
-
-                opacity: 1;
-
-                transform: scale(1);
-
-            }
-
-        }
-
-
-        /* =========================================
-           FECHA FINAL
-           ========================================= */
-
-        .fecha {
-
-            font-size: 30px;
-
-            font-weight: bold;
-
-            margin: 25px 0;
-
-            letter-spacing: 3px;
-
-            line-height: 1.5;
-
-            color: #d8a7ff;
-
-            text-shadow:
-                0 0 10px #9b4dff,
-                0 0 30px rgba(155,77,255,.6);
-
-            animation:
-                fechaBrillo 2.5s
-                ease-in-out
-                infinite alternate;
-
-        }
-
-
-        @keyframes fechaBrillo {
-
-            from {
-
-                transform: scale(1);
-
-                text-shadow:
-                    0 0 8px #9b4dff;
-
-            }
-
-            to {
-
-                transform: scale(1.03);
-
-                text-shadow:
-                    0 0 15px #b86cff,
-                    0 0 35px rgba(155,77,255,.7);
-
-            }
-
-        }
-
-
-        /* =========================================
-           CORAZÓN FINAL
-           ========================================= */
-
-        .corazon-final {
-
-            font-size: 70px;
-
-            animation:
-                latido 1.5s
-                infinite;
-
-            filter:
-                drop-shadow(
-                    0 0 20px
-                    #b84cff
-                );
-
-        }
-
-
-        @keyframes latido {
-
-            0%, 100% {
-
-                transform: scale(1);
-
-            }
-
-            50% {
-
-                transform: scale(1.15);
-
-            }
-
-        }
-
-
-        /* =========================================
-           SCROLL
-           ========================================= */
-
-        .container::-webkit-scrollbar {
-
-            width: 5px;
-
-        }
-
-
-        .container::-webkit-scrollbar-thumb {
-
-            background: #7133a8;
-
-            border-radius: 10px;
-
-        }
-
-
-        /* =========================================
-           CELULAR
-           ========================================= */
-
-        @media (max-width: 600px) {
-
-            .container {
-
-                padding: 28px 22px;
-
-                width: 94%;
-
-            }
-
-            h1 {
-
-                font-size: 23px;
-
-            }
-
-            .fecha {
-
-                font-size: 25px;
-
-            }
-
-        }
-
-    </style>
-
+</style>
 </head>
-
 
 <body>
 
+<div class="estrellas"></div>
 
-    <!-- ESTRELLAS -->
+<div class="container">
 
-    <div class="estrellas"></div>
+    <!-- =========================
+         INICIO
+    ========================== -->
 
+    <div id="inicio" class="acertijo activo">
 
-    <!-- =========================================
-         CONTRASEÑA
-         ========================================= -->
-
-    <div class="container" id="login">
-
-        <div class="lock">
-            🔐
+        <div class="numero">
+            ACCESO SECRETO
         </div>
 
-        <h1>
-            ACCESO RESTRINGIDO
-        </h1>
+        <h1>Un pequeño misterio 💜</h1>
 
-        <p class="subtitle">
+        <p>
+            Si llegaste hasta aquí significa que tienes
+            una llave que puede abrir algo especial.
+        </p>
 
-            Hay algo que quiero decirte...
-            <br>
-
-            pero tendrás que descubrirlo tú.
-
+        <p>
+            Pero primero tendrás que demostrar que
+            sabes cuál es...
         </p>
 
         <input
-            type="password"
             id="password"
-            placeholder="Introduce la contraseña"
+            type="text"
+            placeholder="Escribe la contraseña..."
+            autocomplete="off"
         >
 
         <button onclick="entrar()">
-            INGRESAR
+            🔐 DESBLOQUEAR
         </button>
 
-        <p id="mensaje"></p>
-
-    </div>
-
-
-    <!-- =========================================
-         BIENVENIDA
-         ========================================= -->
-
-    <div class="container hidden" id="bienvenida">
-
-        <div class="lock">
-            ✦
+        <div
+            id="mensajePassword"
+            class="mensaje">
         </div>
 
-        <h1>
-            ACCESO CONCEDIDO
-        </h1>
-
-        <p class="subtitle">
-
-            Has conseguido entrar...
-            <br><br>
-
-            Pero esto apenas comienza.
-
-        </p>
-
-        <button onclick="comenzar()">
-            COMENZAR
-        </button>
-
     </div>
 
 
-    <!-- =========================================
+    <!-- =========================
          ACERTIJO 1
-         ========================================= -->
+    ========================== -->
 
-    <div class="container hidden" id="acertijo1">
+    <div id="acertijo1" class="acertijo">
 
-        <div class="progreso">
+        <div class="numero">
             ACERTIJO 01 / 04
         </div>
 
-        <div class="lock">
-            🧩
-        </div>
-
         <h2>
-            Una pregunta sobre ti...
+            ¿Cuál es la palabra que más usas? 👀
         </h2>
 
-        <p class="subtitle">
-
-            ¿Cuál es la palabra que más usas? 👀
-
+        <p>
+            Piensa en esa palabra que aparece
+            constantemente cuando hablamos.
         </p>
 
         <input
-            type="text"
             id="respuesta1"
-            placeholder="Escribe tu respuesta"
+            type="text"
+            placeholder="Escribe la palabra..."
+            autocomplete="off"
         >
 
         <button onclick="resolver1()">
-            COMPROBAR
+            ✨ COMPROBAR
         </button>
 
-        <p id="mensaje1"></p>
+        <div id="mensaje1" class="mensaje"></div>
 
     </div>
 
 
-    <!-- =========================================
+    <!-- =========================
          ACERTIJO 2
-         ========================================= -->
+    ========================== -->
 
-    <div class="container hidden" id="acertijo2">
+    <div id="acertijo2" class="acertijo">
 
-        <div class="progreso">
+        <div class="numero">
             ACERTIJO 02 / 04
         </div>
 
-        <div class="lock">
-            💜
-        </div>
-
         <h2>
-            Una pregunta sobre nosotros...
+            ¿Cuál es nuestra foto favorita? ❤️
         </h2>
 
-        <p class="subtitle">
-
-            Hay una foto que guarda un
-            recuerdo especial.
-            <br><br>
-
-            Pero esta vez tendrás que
-            encontrarla tú.
-
+        <p>
+            Busca en tu celular la foto correcta
+            y selecciónala.
         </p>
 
-
         <input
-            type="file"
             id="fotoInput"
+            type="file"
             accept="image/*"
             onchange="mostrarFoto()"
         >
 
-
         <img
-            id="fotoPreview"
-            class="foto-preview"
+            id="preview"
             alt="Vista previa"
         >
 
-
         <button onclick="resolver2()">
-
-            🔍 COMPROBAR FOTO
-
+            🖼️ COMPROBAR FOTO
         </button>
 
-
-        <p id="mensaje2"></p>
+        <div id="mensaje2" class="mensaje"></div>
 
     </div>
 
 
-    <!-- =========================================
+    <!-- =========================
          ACERTIJO 3
-         ========================================= -->
+    ========================== -->
 
-    <div class="container hidden" id="acertijo3">
+    <div id="acertijo3" class="acertijo">
 
-        <div class="progreso">
+        <div class="numero">
             ACERTIJO 03 / 04
         </div>
 
-        <div class="lock">
-            🔢
-        </div>
-
         <h2>
-            Una coincidencia...
+            Una pequeña cuenta 🧠
         </h2>
 
-        <p class="subtitle">
-
-            Tres números.
-            <br><br>
-
-            Una sola respuesta.
-
+        <p>
+            Resuelve esto:
         </p>
 
-
-        <div class="ecuacion">
-
-            <div class="pista">
-
-                🎂 <strong>17</strong>
-
-                <br>
-
-                Una edad.
-
-            </div>
-
-
-            <div class="pista">
-
-                🎂 <strong>18</strong>
-
-                <br>
-
-                La otra edad.
-
-            </div>
-
-
-            <div class="pista">
-
-                🕰️ <strong>6</strong>
-
-                <br>
-
-                Los años que llevan
-                conociéndose.
-
-            </div>
-
+        <div class="pista">
+            <strong>
+                17 + 18 + 6 = ?
+            </strong>
         </div>
 
-
-        <p class="subtitle">
-
-            Junta los tres números.
-
-            <br><br>
-
-            ¿Qué resultado obtienes?
-
-        </p>
-
-
         <input
-            type="number"
             id="respuesta3"
-            placeholder="Escribe el resultado"
+            type="number"
+            placeholder="Resultado..."
         >
 
-
         <button onclick="resolver3()">
-
-            COMPROBAR
-
+            🧩 COMPROBAR
         </button>
 
-
-        <p id="mensaje3"></p>
+        <div id="mensaje3" class="mensaje"></div>
 
     </div>
 
 
-    <!-- =========================================
+    <!-- =========================
          ACERTIJO 4
-         ========================================= -->
+    ========================== -->
 
-    <div class="container hidden" id="acertijo4">
+    <div id="acertijo4" class="acertijo">
 
-        <div class="progreso">
+        <div class="numero">
             ACERTIJO 04 / 04
         </div>
 
-        <div class="lock">
-            🔮
-        </div>
-
         <h2>
-            EL ÚLTIMO CÓDIGO
+            La última pieza 🔮
         </h2>
 
-
-        <p class="subtitle">
-
-            Ya encontraste el número.
-
-            <br><br>
-
-            Ahora tendrás que descubrir
-            qué fecha está escondida.
-
+        <p>
+            Si llegaste hasta aquí,
+            la última respuesta está escondida
+            en las siguientes pistas.
         </p>
 
+        <div class="pista">
 
-        <div class="ecuacion">
+            <strong>Pista I</strong><br><br>
 
+            Junta nuestras edades.
+            Súmalas.
 
-            <div class="pista">
-
-                <strong>✦ PISTA I</strong>
-
-                <br><br>
-
-                El día comienza con
-                nuestras edades.
-
-                <br><br>
-
-                Súmalas.
-
-                <br><br>
-
-                Después quítale exactamente
-                <strong>dos semanas</strong>.
-
-            </div>
-
-
-            <div class="pista">
-
-                <strong>✦ PISTA II</strong>
-
-                <br><br>
-
-                Para encontrar el mes,
-                piensa en cuánto tiempo
-                llevan conociéndose.
-
-                <br><br>
-
-                Después añade algo que
-                tienes justo delante de
-                tus ojos.
-
-            </div>
-
-
-            <div class="pista">
-
-                <strong>✦ PISTA III</strong>
-
-                <br><br>
-
-                Para el año...
-
-                <br><br>
-
-                Toma el año en que naciste.
-
-                <br><br>
-
-                Súmale tu edad actual.
-
-            </div>
-
+            Después quítale exactamente
+            dos semanas.
 
         </div>
 
+        <div class="pista">
 
-        <p class="subtitle">
+            <strong>Pista II</strong><br><br>
 
-            Cuando tengas las tres partes,
-            júntalas.
+            Para encontrar el mes,
+            piensa en cuánto tiempo llevan
+            conociéndose.
 
-            <br><br>
+            Después añade la cantidad de letras
+            de la palabra <strong>MES</strong>.
 
-            <strong>DD / MM / AAAA</strong>
+        </div>
 
+        <div class="pista">
+
+            <strong>Pista III</strong><br><br>
+
+            Toma el año en que naciste.
+
+            Súmale tu edad actual.
+
+        </div>
+
+        <p>
+            Introduce la fecha completa:
         </p>
 
-
         <input
-            type="text"
             id="respuesta4"
-            placeholder="Escribe la fecha"
+            type="text"
+            placeholder="DD/MM/AAAA"
+            autocomplete="off"
         >
 
-
         <button onclick="resolver4()">
-
-            🔓 DESBLOQUEAR
-
+            🔮 DESCUBRIR
         </button>
 
-
-        <p id="mensaje4"></p>
+        <div id="mensaje4" class="mensaje"></div>
 
     </div>
 
 
-    <!-- =========================================
+    <!-- =========================
          FINAL
-         ========================================= -->
+    ========================== -->
 
-    <div class="container hidden" id="final">
+    <div id="final" class="acertijo">
 
-        <div class="corazon-final">
+        <div class="numero">
+            TODAS LAS PRUEBAS COMPLETADAS
+        </div>
+
+        <div class="corazon">
             💜
         </div>
 
         <h1>
-            TODAS LAS PRUEBAS
-            <br>
-            COMPLETADAS
+            Lo descubriste.
         </h1>
 
-
-        <p class="subtitle">
-
-            Has descubierto la fecha...
-
+        <p>
+            Después de resolver cada pista,
+            llegaste hasta la fecha escondida...
         </p>
-
 
         <div class="fecha">
 
-            21 DE SEPTIEMBRE
-            <br>
+            <div class="fecha-grande">
+                21 DE SEPTIEMBRE
+            </div>
 
-            DE 2026
+            <div class="fecha-grande">
+                DE 2026
+            </div>
 
         </div>
 
-
-        <p class="subtitle">
-
+        <p>
             Pero esto no termina aquí...
-
         </p>
 
-
         <button onclick="abrirMensaje()">
-
             ▶️ ABRIR MI ÚLTIMO MENSAJE
-
         </button>
 
     </div>
 
+</div>
 
 
 <script>
 
+/* ==================================
+   CONFIGURACIÓN
+================================== */
 
-    /* =========================================
-       CONTRASEÑA
-       ========================================= */
+const CONTRASENA = "ME ENCANTAS";
 
-    const CONTRASENA = "ME ENCANTAS";
+/*
+   IMPORTANTE:
+   Cambia este nombre solamente si
+   tu foto de referencia tiene otro nombre.
+*/
 
-
-    /* =========================================
-       FOTO CORRECTA
-       ========================================= */
-
-    const HASH_FOTO_CORRECTA =
-        "ffe577a0baddaf1f68caa3fc5cefb79bafbceb387dd45cc52dd0eca912dac8cc";
+const FOTO_REFERENCIA = "foto-favorita.jpg";
 
 
-    /* =========================================
-       ENTRAR
-       ========================================= */
+/* ==================================
+   CAMBIAR PANTALLAS
+================================== */
 
-    function entrar() {
+function mostrar(id) {
 
-        const password =
-            document.getElementById("password")
+    document.querySelectorAll(".acertijo")
+        .forEach(elemento => {
+
+            elemento.classList.remove("activo");
+
+        });
+
+    document.getElementById(id)
+        .classList.add("activo");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+/* ==================================
+   CONTRASEÑA
+================================== */
+
+function entrar() {
+
+    const respuesta =
+        document
+        .getElementById("password")
+        .value
+        .trim()
+        .toUpperCase();
+
+    const mensaje =
+        document.getElementById("mensajePassword");
+
+    if (respuesta === CONTRASENA) {
+
+        mensaje.textContent = "";
+
+        mostrar("acertijo1");
+
+    } else {
+
+        mensaje.textContent =
+            "❌ Esa no es la llave...";
+
+    }
+}
+
+
+/* ==================================
+   ACERTIJO 1
+================================== */
+
+function normalizar(texto) {
+
+    return texto
+        .toLowerCase()
+        .trim()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+}
+
+
+function resolver1() {
+
+    const respuesta =
+        normalizar(
+            document
+            .getElementById("respuesta1")
             .value
-            .trim()
-            .toUpperCase();
-
-
-        const mensaje =
-            document.getElementById("mensaje");
-
-
-        if (password === CONTRASENA) {
-
-            document.getElementById("login")
-                .classList.add("hidden");
-
-
-            document.getElementById("bienvenida")
-                .classList.remove("hidden");
-
-
-        } else {
-
-            mensaje.style.color = "#d88cff";
-
-            mensaje.textContent =
-                "Contraseña incorrecta... 👀";
-
-        }
-
-    }
-
-
-    /* =========================================
-       COMENZAR
-       ========================================= */
-
-    function comenzar() {
-
-        document.getElementById("bienvenida")
-            .classList.add("hidden");
-
-
-        document.getElementById("acertijo1")
-            .classList.remove("hidden");
-
-    }
-
-
-    /* =========================================
-       ACERTIJO 1
-       ========================================= */
-
-    function resolver1() {
-
-        const respuesta =
-            document.getElementById("respuesta1")
-            .value
-            .trim()
-            .toLowerCase()
-            .replace(/\s+/g, " ");
-
-
-        const mensaje =
-            document.getElementById("mensaje1");
-
-
-        const respuestaCorrecta =
-            "ozii ozii";
-
-
-        if (respuesta === respuestaCorrecta) {
-
-            mensaje.style.color = "#8effc1";
-
-            mensaje.textContent =
-                "✓ Correcto. Acertijo desbloqueado.";
-
-
-            setTimeout(() => {
-
-                document.getElementById("acertijo1")
-                    .classList.add("hidden");
-
-
-                document.getElementById("acertijo2")
-                    .classList.remove("hidden");
-
-            }, 1000);
-
-
-        } else {
-
-            mensaje.style.color = "#d88cff";
-
-            mensaje.textContent =
-                "Mmm... no es esa. Intenta otra vez 👀";
-
-        }
-
-    }
-
-
-    /* =========================================
-       MOSTRAR FOTO
-       ========================================= */
-
-    function mostrarFoto() {
-
-        const input =
-            document.getElementById("fotoInput");
-
-
-        const preview =
-            document.getElementById("fotoPreview");
-
-
-        if (input.files.length > 0) {
-
-            const archivo =
-                input.files[0];
-
-
-            const url =
-                URL.createObjectURL(archivo);
-
-
-            preview.src = url;
-
-            preview.style.display = "block";
-
-        }
-
-    }
-
-
-    /* =========================================
-       ACERTIJO 2
-       ========================================= */
-
-    async function resolver2() {
-
-        const input =
-            document.getElementById("fotoInput");
-
-
-        const mensaje =
-            document.getElementById("mensaje2");
-
-
-        if (input.files.length === 0) {
-
-            mensaje.style.color = "#d88cff";
-
-            mensaje.textContent =
-                "Primero selecciona una foto. 👀";
-
-            return;
-
-        }
-
-
-        const archivo =
-            input.files[0];
-
-
-        const buffer =
-            await archivo.arrayBuffer();
-
-
-        const hashBuffer =
-            await crypto.subtle.digest(
-                "SHA-256",
-                buffer
-            );
-
-
-        const hashArray =
-            Array.from(
-                new Uint8Array(hashBuffer)
-            );
-
-
-        const hash =
-            hashArray
-                .map(byte =>
-                    byte.toString(16)
-                        .padStart(2, "0")
-                )
-                .join("");
-
-
-        if (hash === HASH_FOTO_CORRECTA) {
-
-            mensaje.style.color = "#8effc1";
-
-            mensaje.textContent =
-                "✓ Foto reconocida. Acertijo desbloqueado.";
-
-
-            setTimeout(() => {
-
-                document.getElementById("acertijo2")
-                    .classList.add("hidden");
-
-
-                document.getElementById("acertijo3")
-                    .classList.remove("hidden");
-
-            }, 1200);
-
-
-        } else {
-
-            mensaje.style.color = "#d88cff";
-
-            mensaje.textContent =
-                "✕ Esa no es la foto que estoy buscando... 👀";
-
-        }
-
-    }
-
-
-    /* =========================================
-       ACERTIJO 3
-       ========================================= */
-
-    function resolver3() {
-
-        const respuesta =
-            document.getElementById("respuesta3")
-            .value
-            .trim();
-
-
-        const mensaje =
-            document.getElementById("mensaje3");
-
-
-        if (respuesta === "41") {
-
-            mensaje.style.color = "#8effc1";
-
-            mensaje.textContent =
-                "✓ Correcto. Guarda ese número...";
-
-
-            setTimeout(() => {
-
-                document.getElementById("acertijo3")
-                    .classList.add("hidden");
-
-
-                document.getElementById("acertijo4")
-                    .classList.remove("hidden");
-
-            }, 1200);
-
-
-        } else {
-
-            mensaje.style.color = "#d88cff";
-
-            mensaje.textContent =
-                "No exactamente... vuelve a calcularlo. 👀";
-
-        }
-
-    }
-
-
-    /* =========================================
-       ACERTIJO 4
-       ========================================= */
-
-    function resolver4() {
-
-        const respuesta =
-            document.getElementById("respuesta4")
-            .value
-            .trim()
-            .replace(/\s/g, "")
-            .replace(/-/g, "/");
-
-
-        const mensaje =
-            document.getElementById("mensaje4");
-
-
-        if (
-            respuesta === "21/09/2026" ||
-            respuesta === "21/9/2026"
-        ) {
-
-            mensaje.style.color = "#8effc1";
-
-            mensaje.textContent =
-                "✓ Código final desbloqueado.";
-
-
-            setTimeout(() => {
-
-                document.getElementById("acertijo4")
-                    .classList.add("hidden");
-
-
-                document.getElementById("final")
-                    .classList.remove("hidden");
-
-            }, 1500);
-
-
-        } else {
-
-            mensaje.style.color = "#d88cff";
-
-            mensaje.textContent =
-                "La fecha no es correcta... todavía hay una pista. 👀";
-
-        }
-
-    }
-
-
-    /* =========================================
-       ÚLTIMO MENSAJE
-       ========================================= */
-
-    function abrirMensaje() {
-
-        window.open(
-            "https://www.youtube.com/watch?v=pCPYb7KPoUc",
-            "_blank"
         );
 
+    const mensaje =
+        document.getElementById("mensaje1");
+
+    if (respuesta === "ozii ozii") {
+
+        mensaje.textContent = "";
+
+        mostrar("acertijo2");
+
+    } else {
+
+        mensaje.textContent =
+            "👀 Mmm... piensa en esa palabra que repites mucho.";
+
+    }
+}
+
+
+/* ==================================
+   MOSTRAR FOTO
+================================== */
+
+function mostrarFoto() {
+
+    const input =
+        document.getElementById("fotoInput");
+
+    const preview =
+        document.getElementById("preview");
+
+    if (!input.files || !input.files[0]) {
+
+        preview.style.display = "none";
+
+        return;
     }
 
+    const archivo = input.files[0];
+
+    const url =
+        URL.createObjectURL(archivo);
+
+    preview.src = url;
+
+    preview.style.display = "block";
+}
+
+
+/* ==================================
+   CARGAR IMAGEN
+================================== */
+
+function cargarImagen(src) {
+
+    return new Promise((resolve, reject) => {
+
+        const imagen = new Image();
+
+        imagen.onload = () => resolve(imagen);
+
+        imagen.onerror = reject;
+
+        imagen.src = src;
+
+    });
+
+}
+
+
+/* ==================================
+   COMPARACIÓN VISUAL
+================================== */
+
+async function obtenerPromedioImagen(
+    fuente
+) {
+
+    const imagen =
+        await cargarImagen(fuente);
+
+    const canvas =
+        document.createElement("canvas");
+
+    const tamaño = 32;
+
+    canvas.width = tamaño;
+    canvas.height = tamaño;
+
+    const ctx =
+        canvas.getContext("2d", {
+            willReadFrequently: true
+        });
+
+    ctx.drawImage(
+        imagen,
+        0,
+        0,
+        tamaño,
+        tamaño
+    );
+
+    const datos =
+        ctx.getImageData(
+            0,
+            0,
+            tamaño,
+            tamaño
+        ).data;
+
+    /*
+       Convertimos la imagen a escala
+       de grises y calculamos la luminosidad
+       de cada pixel.
+    */
+
+    const grises = [];
+
+    for (
+        let i = 0;
+        i < datos.length;
+        i += 4
+    ) {
+
+        const r = datos[i];
+        const g = datos[i + 1];
+        const b = datos[i + 2];
+
+        const gris =
+            0.299 * r +
+            0.587 * g +
+            0.114 * b;
+
+        grises.push(gris);
+    }
+
+    return grises;
+}
+
+
+/* ==================================
+   DISTANCIA ENTRE IMÁGENES
+================================== */
+
+function distanciaImagen(a, b) {
+
+    if (a.length !== b.length) {
+
+        return Infinity;
+    }
+
+    let diferencia = 0;
+
+    for (let i = 0; i < a.length; i++) {
+
+        diferencia +=
+            Math.abs(a[i] - b[i]);
+
+    }
+
+    return diferencia / a.length;
+}
+
+
+/* ==================================
+   COMPROBAR FOTO
+================================== */
+
+async function resolver2() {
+
+    const input =
+        document.getElementById("fotoInput");
+
+    const mensaje =
+        document.getElementById("mensaje2");
+
+    if (!input.files || !input.files[0]) {
+
+        mensaje.textContent =
+            "📸 Primero selecciona una foto.";
+
+        return;
+    }
+
+    mensaje.textContent =
+        "🔎 Comparando la imagen...";
+
+    try {
+
+        /*
+           Imagen seleccionada desde el celular
+        */
+
+        const fotoSeleccionada =
+            await obtenerPromedioImagen(
+                URL.createObjectURL(input.files[0])
+            );
+
+
+        /*
+           Imagen original guardada
+           en GitHub Pages
+        */
+
+        const fotoCorrecta =
+            await obtenerPromedioImagen(
+                FOTO_REFERENCIA
+            );
+
+
+        const diferencia =
+            distanciaImagen(
+                fotoSeleccionada,
+                fotoCorrecta
+            );
+
+
+        /*
+           Tolerancia:
+
+           Mientras menor sea el número,
+           más parecidas son las imágenes.
+
+           35 permite pequeñas diferencias
+           provocadas por compresión del celular.
+        */
+
+        if (diferencia <= 35) {
+
+            mensaje.textContent = "";
+
+            mostrar("acertijo3");
+
+        } else {
+
+            mensaje.textContent =
+                "❌ Esa no parece ser la foto correcta...";
+
+        }
+
+    } catch (error) {
+
+        console.error(error);
+
+        mensaje.textContent =
+            "⚠️ No pude comparar la foto. Revisa que la foto de referencia exista en GitHub.";
+
+    }
+}
+
+
+/* ==================================
+   ACERTIJO 3
+================================== */
+
+function resolver3() {
+
+    const respuesta =
+        document
+        .getElementById("respuesta3")
+        .value
+        .trim();
+
+    const mensaje =
+        document.getElementById("mensaje3");
+
+    if (respuesta === "41") {
+
+        mensaje.textContent = "";
+
+        mostrar("acertijo4");
+
+    } else {
+
+        mensaje.textContent =
+            "🧠 Casi... vuelve a revisar la suma.";
+
+    }
+}
+
+
+/* ==================================
+   ACERTIJO 4
+================================== */
+
+function resolver4() {
+
+    let respuesta =
+        document
+        .getElementById("respuesta4")
+        .value
+        .trim()
+        .replace(/-/g, "/")
+        .replace(/\./g, "/");
+
+    const mensaje =
+        document.getElementById("mensaje4");
+
+
+    /*
+       Aceptamos:
+
+       21/09/2026
+       21/9/2026
+       21-09-2026
+       21.09.2026
+    */
+
+    const partes =
+        respuesta.split("/");
+
+
+    if (partes.length !== 3) {
+
+        mensaje.textContent =
+            "🔮 Usa el formato DD/MM/AAAA.";
+
+        return;
+    }
+
+
+    const dia =
+        parseInt(partes[0]);
+
+    const mes =
+        parseInt(partes[1]);
+
+    const año =
+        parseInt(partes[2]);
+
+
+    if (
+        dia === 21 &&
+        mes === 9 &&
+        año === 2026
+    ) {
+
+        mensaje.textContent = "";
+
+        mostrar("final");
+
+    } else {
+
+        mensaje.textContent =
+            "🌌 La fecha todavía está escondida...";
+
+    }
+}
+
+
+/* ==================================
+   YOUTUBE
+================================== */
+
+function abrirMensaje() {
+
+    window.open(
+        "https://www.youtube.com/watch?v=pCPYb7KPoUc",
+        "_blank"
+    );
+
+}
+
+
+/* ==================================
+   SOLUCIÓN PARA EL TECLADO DEL CELULAR
+================================== */
+
+document
+    .querySelectorAll("input")
+    .forEach(input => {
+
+        input.addEventListener(
+            "focus",
+            () => {
+
+                setTimeout(() => {
+
+                    input.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center"
+                    });
+
+                }, 350);
+
+            }
+        );
+
+    });
+
+
+/* ==================================
+   ENTER PARA RESPUESTAS
+================================== */
+
+document
+    .getElementById("password")
+    .addEventListener("keydown", e => {
+
+        if (e.key === "Enter") {
+
+            entrar();
+
+        }
+
+    });
+
+
+document
+    .getElementById("respuesta1")
+    .addEventListener("keydown", e => {
+
+        if (e.key === "Enter") {
+
+            resolver1();
+
+        }
+
+    });
+
+
+document
+    .getElementById("respuesta3")
+    .addEventListener("keydown", e => {
+
+        if (e.key === "Enter") {
+
+            resolver3();
+
+        }
+
+    });
+
+
+document
+    .getElementById("respuesta4")
+    .addEventListener("keydown", e => {
+
+        if (e.key === "Enter") {
+
+            resolver4();
+
+        }
+
+    });
 
 </script>
 
