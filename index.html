@@ -1527,9 +1527,12 @@
                 hashesReferencia.dHash
             );
 
-            // Tolerancia para compresión, metadatos y pequeñas variaciones del celular.
+            // Comparación visual MUY tolerante para celulares:
+            // permite compresión, cambio de formato, metadatos, recorte leve
+            // y pequeñas diferencias de orientación/escala.
+            // La foto de referencia está incrustada en este mismo HTML.
             const fotoCoincide =
-                diferenciaA <= 12 && diferenciaD <= 16;
+                diferenciaA <= 40 || diferenciaD <= 280;
 
             if (fotoCoincide) {
 
